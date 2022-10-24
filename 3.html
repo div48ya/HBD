@@ -36,16 +36,17 @@
   ======================================================== -->
 </head>
 
-<body>
+<body onload="typeWriter()">
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <a href="index.html" class="hero-logo wiggle" data-aos="zoom-in"><img src="assets/img/logo.png" alt="" height="100px" width="80px"></a>
-      <h1 data-aos="zoom-in">Hey! Birthday Girl</h1>
-      <h2 data-aos="fade-up">I am happy to present you some gifts through this site.</h2>
-      <h2 data-aos="fade-up">But before that &#128540;</h2>
-      <a data-aos="fade-up" data-aos-delay="200" class="btn-get-started scrollto wiggle btn">Lets Go</a>
+      <h1 data-aos="zoom-in" id="ques"></h1>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="oneInput" placeholder="Answer">
+        <label for="oneInput">Answer</label>
+      </div>
+      <button data-aos="fade-up" data-aos-delay="200" class="btn-get-started scrollto btn" id="one" disabled>Surprise Me</button>
       <span class="color color--blue" data-value="1"></span>
       <span class="color color--orange" data-value="1"></span>
       <span class="color color--green" data-value="1"></span>
@@ -65,13 +66,37 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script>
-      const button = document.querySelector('.btn');
-      button.addEventListener('click',(e)=>{
-      e.preventDefault();
-      button.classList.add('btn--clicked');
-      document.querySelectorAll('span').forEach((element)=>{element.classList.add('expanded')})
-      setTimeout(()=>{document.location.href = "1.html"; button.classList.remove("btn--clicked"); },2000);
-      setTimeout(()=>{document.querySelectorAll('span').forEach((element)=>{element.classList.remove('expanded')})},1700)});
+const oneInput = document.getElementById("oneInput");
+    const oneButton = document.getElementById("one");
+    if (oneButton) {
+      oneInput.addEventListener("keyup", (e) => {
+        console.log("change")
+        if (e.target.value === "dog") {
+          console.log(e.target.value);
+          oneButton.removeAttribute("disabled");
+        }
+      });
+    }
+
+    const button = document.querySelector('.btn');
+          button.addEventListener('click',(e)=>{
+          e.preventDefault();
+          button.classList.add('btn--clicked');
+          document.querySelectorAll('span').forEach((element)=>{element.classList.add('expanded')})
+          setTimeout(()=>{document.location.href = "party.html"; button.classList.remove("btn--clicked"); },2000);
+          setTimeout(()=>{document.querySelectorAll('span').forEach((element)=>{element.classList.remove('expanded')})},1700)});
+      
+    var i = 0;
+    var txt = 'Question 3 - What animal you will love to keep as a pet?'; /* The text */
+    var speed = 100; /* The speed/duration of the effect in milliseconds */
+
+    function typeWriter() {
+      if (i < txt.length) {
+        document.getElementById("ques").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
   </script>
 
 </body>
